@@ -1,0 +1,3 @@
+[submodule "GLEW"]
+	path = GLEW
+	url = https://github.com/Perlmint/glew-cmake.git
