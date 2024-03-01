@@ -51,30 +51,31 @@ int main(void)
 	mainWindow->Initialise();
 
 	unique_ptr<Graphic> graphic_controller = Graphic::GetInstance();
-	graphic_controller->SetProjection(WIDTH, HEIGHT);
+	graphic_controller->Initialize(WIDTH, HEIGHT);
 
-	Rectangle boundary(0.f, 0.f, 2 * HALF_SIMUL_WIDTH - 1, 2 * HALF_SIMUL_HEIGHT - 1, glm::vec4(0.f, 0.5f, 0.5f, 1.f));
+	//Rectangle boundary(0.f, 0.f, 2 * HALF_SIMUL_WIDTH - 1, 2 * HALF_SIMUL_HEIGHT - 1, glm::vec4(0.f, 0.5f, 0.5f, 1.f));
+	Rectangle boundary(0.f, 0.f, WIDTH - 1, HEIGHT - 1, glm::vec4(0.f, 0.5f, 0.5f, 1.f));
 	
 	QuadTree qTree(boundary, 4);
 
-	for (int i = 0; i < 1000; ++i) {
-		int x = rand() % (HALF_SIMUL_WIDTH - 10);
+	for (int i = 0; i < 100; ++i) {
+		int x = rand() % ((WIDTH / 2) - 10);
 		if (rand() % 2 == 0) {
 			x = -x;
 		}
 
-		int y = rand() % (HALF_SIMUL_HEIGHT - 10);
+		int y = rand() % ((HEIGHT / 2) - 10);
 		if (rand() % 2 == 0) {
 			y = -y;
 		}
 
-		int xVel = rand() % 30;
+		int xVel = rand() % 300;
 		if (rand() % 2 == 0) {
 			xVel = -xVel;
 		}
 
 
-		int yVel = rand() % 30;
+		int yVel = rand() % 300;
 		if (rand() % 2 == 0) {
 			yVel = -yVel;
 		}
@@ -86,7 +87,7 @@ int main(void)
 		glm::vec4 rgba(r, g, b, 1.f);
 
 
-		Particle2D particle(x, y, 1.25f, xVel, yVel, rgba);
+		Particle2D particle(x, y, 15.f, xVel, yVel, rgba);
 		qTree.Insert(particle);
 	}
 

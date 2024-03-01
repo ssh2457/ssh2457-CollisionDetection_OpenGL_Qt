@@ -22,8 +22,9 @@ public:
 
 	static std::unique_ptr<Graphic> GetInstance();
 
+	void Initialize(const GLint width, const GLint height);
+
 	glm::mat4 GetProjection() const { return mProjection; }
-	void SetProjection(const GLint width, const GLint height);
 
 	GLuint GetCircleVAO() const { return mVAOs[0]; }
 	GLuint GetRectangleVAO() const { return mVAOs[1]; }
@@ -46,7 +47,9 @@ private:
 	GLuint mCircleVertexNum;
 	GLuint mRectangleVertexNum;
 
+	void SetProjection(const GLint width, const GLint height);
+
 	void CreateCircle();
-	void CreateRectangle();
-	void CreatePolygons();
+	void CreateRectangle(const GLint width, const GLint height);
+	void CreatePolygons(const GLint width, const GLint height);
 };

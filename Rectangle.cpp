@@ -92,16 +92,10 @@ void Rectangle::Draw(Graphic* graphic)
 	SimpleShader* shader = graphic->GetShader();
 	shader->UseShader();
 	glm::mat4 model(1.f);
-
-	//model = glm::translate(model, glm::vec3(mCenter.vec2[X] / HALF_SIMUL_WIDTH, mCenter.vec2[Y] / HALF_SIMUL_HEIGHT, 0.f));
-	//float width = (mWidth / 2.f) / HALF_SIMUL_WIDTH;
-	//float height = (mHeight / 2.f) / HALF_SIMUL_HEIGHT;
-
+	
 	model = glm::translate(model, glm::vec3(mCenter.vec2[X], mCenter.vec2[Y], 0.f));
-	float width = (mWidth / 2.f);
-	float height = (mHeight / 2.f);
-
-	model = glm::scale(model, glm::vec3((1.f, 1.f, (width + height) / 2.f)));
+	model = glm::scale(model, glm::vec3((0.f, 0.f, mWidth / 2.f)));
+	
 
 	glUniformMatrix4fv(shader->GetUniformWorld(), 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(shader->GetUniformProejction(), 1, GL_FALSE, glm::value_ptr(graphic->GetProjection()));
@@ -113,21 +107,6 @@ void Rectangle::Draw(Graphic* graphic)
 	glDrawArrays(GL_LINES, 0, graphic->GetRectangleVertexNum());
 	glBindVertexArray(0);
 	glUseProgram(0);
-
-	/*
-	glColor3f(0.f, 1.0f, 1.f);
-	glPointSize(15.f);
-
-	glBegin(GL_LINE_LOOP);
-
-	glVertex2f((mCenter.vec2[X] - (mWidth / 2.f)) / HALF_SIMUL_WIDTH, (mCenter.vec2[Y] + (mHeight / 2.f)) / HALF_SIMUL_HEIGHT);
-	glVertex2f((mCenter.vec2[X] - (mWidth / 2.f)) / HALF_SIMUL_WIDTH, (mCenter.vec2[Y] - (mHeight / 2.f)) / HALF_SIMUL_HEIGHT);
-	glVertex2f((mCenter.vec2[X] + (mWidth / 2.f)) / HALF_SIMUL_WIDTH, (mCenter.vec2[Y] - (mHeight / 2.f)) / HALF_SIMUL_HEIGHT);
-	glVertex2f((mCenter.vec2[X] + (mWidth / 2.f)) / HALF_SIMUL_WIDTH, (mCenter.vec2[Y] + (mHeight / 2.f)) / HALF_SIMUL_HEIGHT);
-
-	glEnd();
-	glFinish();
-	*/
 }
 
 void Rectangle::TestDraw()

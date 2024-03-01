@@ -30,8 +30,6 @@ Graphic::Graphic()
 
 	mVBOs[0] = 0;
 	mVBOs[0] = 0;
-
-	CreatePolygons();
 }
 
 Graphic::~Graphic()
@@ -44,6 +42,12 @@ void Graphic::SetProjection(const GLint width, const GLint height)
 	const float half_width = width / 2.f;
 	const float half_height = height / 2.f;
 	mProjection = glm::ortho(-half_width, half_width, -half_height, half_height, 0.0f, 1.0f);
+}
+
+void Graphic::Initialize(const GLint width, const GLint height)
+{
+	SetProjection(width, height);
+	CreatePolygons(width, height);
 }
 
 void Graphic::CreateCircle()
@@ -95,45 +99,47 @@ void Graphic::CreateCircle()
 }
 
 
-void Graphic::CreateRectangle()
+void Graphic::CreateRectangle(const GLint width, const GLint height)
 {
+	float ratio = width / (float)height;
+
 	mRectangleVertexNum = 24;
 	float* vertices = new float[mRectangleVertexNum];
 	vertices[3 * 0 + 0] = -1.f;
-	vertices[3 * 0 + 1] = 1.f;
+	vertices[3 * 0 + 1] = 1.f / ratio;
 	vertices[3 * 0 + 2] = 0.f;
 
 	vertices[3 * 1 + 0] = 1.f;
-	vertices[3 * 1 + 1] = 1.f;
+	vertices[3 * 1 + 1] = 1.f / ratio;
 	vertices[3 * 1 + 2] = 0.f;
 
 	//
 	vertices[3 * 2 + 0] = 1.f;
-	vertices[3 * 2 + 1] = 1.f;
+	vertices[3 * 2 + 1] = 1.f / ratio;
 	vertices[3 * 2 + 2] = 0.f;
 
 	vertices[3 * 3 + 0] = 1.f;
-	vertices[3 * 3 + 1] = -1.f;
+	vertices[3 * 3 + 1] = -1.f / ratio;
 	vertices[3 * 3 + 2] = 0.f;
 
 	//
 	vertices[3 * 4 + 0] = 1.f;
-	vertices[3 * 4 + 1] = -1.f;
+	vertices[3 * 4 + 1] = -1.f / ratio;
 	vertices[3 * 4 + 2] = 0.f;
 
 	vertices[3 * 5 + 0] = -1.0f;
-	vertices[3 * 5 + 1] = -1.0f;
+	vertices[3 * 5 + 1] = -1.0f / ratio;
 	vertices[3 * 5 + 2] = 0.f;
 
 	//
 	vertices[3 * 6 + 0] = -1.0f;
-	vertices[3 * 6 + 1] = -1.0f;
+	vertices[3 * 6 + 1] = -1.0f / ratio;
 	vertices[3 * 6 + 2] = 0.f;
 
 	vertices[3 * 7 + 0] = -1.f;
-	vertices[3 * 7 + 1] = 1.f;
+	vertices[3 * 7 + 1] = 1.f / ratio;
 	vertices[3 * 7 + 2] = 0.f;
-	
+
 
 	glGenVertexArrays(1, &mVAOs[1]);
 	glGenBuffers(1, &mVBOs[1]);
@@ -151,8 +157,8 @@ void Graphic::CreateRectangle()
 	delete[] vertices;
 }
 
-void Graphic::CreatePolygons()
+void Graphic::CreatePolygons(const GLint width, const GLint height)
 {
 	CreateCircle();
-	CreateRectangle();
+	CreateRectangle(width, height);
 }

@@ -52,10 +52,6 @@ void Particle2D::Draw(Graphic* graphic)
 	SimpleShader* shader = graphic->GetShader();
 	shader->UseShader();
 	glm::mat4 model(1.f);
-	/*
-	model = glm::translate(model, glm::vec3(mCenter.vec2[X] / HALF_SIMUL_WIDTH, mCenter.vec2[Y]/ HALF_SIMUL_HEIGHT, 0.f));
-	model = glm::scale(model, glm::vec3(mRadius / HALF_SIMUL_WIDTH, mRadius / HALF_SIMUL_HEIGHT, 1.f));
-	*/
 
 	model = glm::translate(model, glm::vec3(mCenter.vec2[X], mCenter.vec2[Y], 0.f));
 	model = glm::scale(model, glm::vec3(mRadius, mRadius, 1.f));
@@ -70,54 +66,6 @@ void Particle2D::Draw(Graphic* graphic)
 	glBindVertexArray(0);
 	glUseProgram(0);
 
-	/*
-	float xPos = 0.f;
-	float yPos = 0.f;
-
-	float xCoord = mCenter.vec2[X] / HALF_SIMUL_WIDTH;
-	float yCoord = mCenter.vec2[Y] / HALF_SIMUL_HEIGHT;
-
-	float prevX = xPos;
-	float prevY = yPos;
-
-	if (mCollided) {
-		for (int i = 0; i <= steps; ++i) {
-			float newX = mRadius / HALF_SIMUL_WIDTH * glm::sin(angle * i);
-			float newY = -mRadius / HALF_SIMUL_HEIGHT * glm::cos(angle * i);
-
-			glBegin(GL_TRIANGLES);
-			glColor3f(1.f, 1.f, 0.f);
-
-			glVertex3f(xCoord, yCoord, 0.f);
-			glVertex3f(xCoord + prevX, yCoord + prevY, 0.f);
-			glVertex3f(xCoord + newX, yCoord + newY, 0.f);
-
-			glEnd();
-			glFinish();
-
-			prevX = newX;
-			prevY = newY;
-		}
-	} else {
-		for (int i = 0; i <= steps; ++i) {
-			float newX = mRadius / HALF_SIMUL_WIDTH * glm::sin(angle * i);
-			float newY = -mRadius / HALF_SIMUL_HEIGHT * glm::cos(angle * i);
-
-			glBegin(GL_TRIANGLES);
-			glColor3f(1.f, 0.f, 0.f);
-
-			glVertex3f(xCoord, yCoord, 0.f);
-			glVertex3f(xCoord + prevX, yCoord + prevY, 0.f);
-			glVertex3f(xCoord + newX, yCoord + newY, 0.f);
-
-			glEnd();
-			glFinish();
-
-			prevX = newX;
-			prevY = newY;
-		}
-	}
-	*/
 }
 
 void Particle2D::SetCollided(const bool isCollided)
@@ -140,7 +88,7 @@ bool Particle2D::CheckCollision(Particle2D& other)
 	float y_sq = (p2_coords.vec2[Y] - p1_coords.vec2[Y]) * (p2_coords.vec2[Y] - p1_coords.vec2[Y]);
 
 	float length_sq = (p1_radius + p2_radius) * (p1_radius + p2_radius);
-	//&& !(particle1.GetCollided() || particle2.GetCollided())
+
 	if (x_sq + y_sq <= length_sq) {
 
 		const float m1 = p1_radius;
