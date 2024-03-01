@@ -1,0 +1,7 @@
+/out/build/x64-debug
+.vs
+GLEW
+GLFW
+GLM
+SPDLOG
+.gitmodules

@@ -1,0 +1,89 @@
+/*
+vector<Particle2D> particles;
+int count = 1000;
+particles.reserve(count);
+
+for (int i = 0; i < count; ++i) {
+	int x = rand() % HALF_SIMUL_WIDTH;
+	if (rand() % 2 == 0) {
+		x = -x;
+	}
+
+	int y = rand() % HALF_SIMUL_HEIGHT;
+	if (rand() % 2 == 0) {
+		y = -y;
+	}
+
+	int xVel = rand() % 30;
+	if (rand() % 2 == 0) {
+		xVel = -xVel;
+	}
+
+
+	int yVel = rand() % 30;
+	if (rand() % 2 == 0) {
+		yVel = -yVel;
+	}
+
+	float r = (rand() % 101) / 100.f;
+	float g = (rand() % 101) / 100.f;
+	float b = (rand() % 101) / 100.f;
+	glm::vec4 rgba(r, g, b, 1.f);
+
+
+	Particle2D particle(x, y, 1.25f, xVel, yVel, rgba);
+	particles.push_back(particle);
+}
+*/
+
+		/*
+		set<int> used_indices;
+
+		for (int i = 0; i < particles.size(); ++i) {
+			if (used_indices.find(i) != used_indices.end()) {
+				continue;
+			}
+
+			used_indices.insert(i);
+
+
+			int nearestIdx = -1;
+			float min_length_sq = FLT_MAX;
+
+			for (int j = 0; j < particles.size(); ++j) {
+				if (used_indices.find(j) != used_indices.end()) {
+					continue;
+				}
+
+				float length_sq = pow(abs(particles[j].GetCoords().vec2[X] - particles[i].GetCoords().vec2[X]), 2)
+					+ pow(abs(particles[j].GetCoords().vec2[Y] - particles[i].GetCoords().vec2[Y]), 2);
+				if (i != j && min_length_sq > length_sq) {
+					min_length_sq = length_sq;
+					nearestIdx = j;
+				}
+			}
+
+			if (nearestIdx != -1) {
+				// Check collision
+				bool collided = particles[i].CheckCollision(particles[nearestIdx]);
+
+				if (collided) {
+					particles[nearestIdx].Update(delta);
+					particles[nearestIdx].Draw(graphic_controller);
+
+					used_indices.insert(nearestIdx);
+				}
+
+			}
+
+			// Check boundary
+			boundary.CheckBoundary(particles[i]);
+		
+			// Update collision result
+			particles[i].Update(delta);
+			particles[i].Draw(graphic_controller);
+		}
+		boundary.Draw(graphic_controller);
+		*/
+        
+https://www.linkedin.com/in/seonghyunsong

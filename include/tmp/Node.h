@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Point.h"
+#include "Particle2D.h"
 
 typedef struct Node {
-	point2D_t point;
+	Particle2D* particle;
 	Node* left;
 	Node* right;
-	size_t depth;
 } node_t;
